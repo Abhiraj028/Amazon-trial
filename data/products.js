@@ -1,5 +1,20 @@
 const products = [
   {
+    id: "z43638ce-6a230-4b85-bf7f-e1d0b678f5c6",
+    image: "images/products/chitale-bakarwadi.png",
+    name: "Chitale Bandhu Bakarwadi",
+    rating: {
+      stars: 5,
+      count: 172
+    },
+    priceCents: 320,
+    keywords: [
+      "chitale",
+      "bakarwadi",
+      "snacks"
+    ]
+  },
+  {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
     name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
