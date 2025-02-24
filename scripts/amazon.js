@@ -1,4 +1,11 @@
-// GENERATES PRODUCTS LISTINGS ON THE FRONT PAGE FROM PRODUCT DATA
+//import statments
+
+import {cart,addToCart} from "../data/cart.js";
+import { products } from "../data/products.js";
+
+updateCartQuantity();
+
+// generates html for the products on front page
 let line = "";
 
 products.forEach((product) => {
@@ -56,56 +63,46 @@ products.forEach((product) => {
 
 document.querySelector(".js-products-grid").innerHTML = line;
 
-/////////////////////////////////////////////////////////
 
-//ADDING FUCNTIONALITY TO ADD TO CART
+
+//adds functionality to add to cart
 
 document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
 
 //added to cart msg
-    const addedToCart = document.querySelector(`.js-added-${productId}`);
-    let timeoutId;
-    clearTimeout(timeoutId);
-    addedToCart.classList.add("js-added");
-      timeoutId = setTimeout(()=>{
-      addedToCart.classList.remove("js-added");
-    },2000);
+    addedToCartNotification(productId);
     
-
-
 // quantity selection    
-    const quantitySelector=Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-
-    let match;
-
-    cart.forEach((items) => {
-      if (productId === items.productId) {
-        match = items;
-      }
-    });
-
-    if (match) {
-      match.quantity += quantitySelector;
-    } else {
-      cart.push({
-        productId: productId,
-        quantity: quantitySelector,
-      });
-    }
+    addToCart(productId);
 
     console.log(cart);
 
 //top right cart quantity updation   
-    let cartQuantity = 0;
+    updateCartQuantity();
+  });
+});
+
+
+//functions for the functionality
+function updateCartQuantity(){
+  let cartQuantity = 0;
 
     cart.forEach((items) => {
       cartQuantity += items.quantity;
     });
 
     document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-  });
-});
+}
 
-//////////////////////////////////////////////////////////
+function addedToCartNotification(productId){
+  const addedToCart = document.querySelector(`.js-added-${productId}`);
+    let timeoutId;
+    clearTimeout(timeoutId);
+    addedToCart.classList.add("js-added");
+      timeoutId = setTimeout(()=>{
+      addedToCart.classList.remove("js-added");
+    },2000);
+}
+
