@@ -5,6 +5,9 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
+
+topUpdater();
+
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
 
@@ -74,8 +77,7 @@ export function renderOrderSummary() {
 
       const priceString = deliveryOption.priceCents === 0 ? "FREE" : `$${formatMoney(deliveryOption.priceCents)} -`;
 
-      console.log(typeof deliveryOption.id);
-      console.log(typeof cartItem.deliveryOptionId);
+      
 
       const isChecked = String(deliveryOption.id) === String(cartItem.deliveryOptionId);
 
@@ -115,6 +117,7 @@ export function renderOrderSummary() {
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.remove();
         renderPaymentSummary();
+        topUpdater();
       });
     });
 
@@ -130,3 +133,17 @@ export function renderOrderSummary() {
 }
 
 renderOrderSummary();
+
+
+function topUpdater(){
+  let cartQuantity = 0;
+
+    cart.forEach((items) => {
+      cartQuantity += items.quantity;
+    });
+
+    const doc = document.querySelector(".return-to-home-link");
+
+    doc.innerHTML = `${cartQuantity} items`;
+}
+

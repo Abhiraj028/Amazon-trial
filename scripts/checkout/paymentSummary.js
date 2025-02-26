@@ -3,6 +3,8 @@ import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { formatMoney } from "../utils/priceCalc.js";
 
+
+
 export function renderPaymentSummary() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
@@ -16,9 +18,19 @@ export function renderPaymentSummary() {
     shippingPriceCents += deliveryOption.priceCents;
   });
 
+  console.log('Product Price Cents:', productPriceCents);
+  console.log('Shipping Price Cents:', shippingPriceCents);
+
   const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
+  
+
   const taxCents = totalBeforeTaxCents * 0.1;
+  
+
   const totalCents = totalBeforeTaxCents + taxCents;
+
+  
+  
 
   const paymentHTML = 
    `<div class="payment-summary-title">
@@ -26,7 +38,7 @@ export function renderPaymentSummary() {
     </div>
 
     <div class="payment-summary-row">
-        <div>Items (3):</div>
+        <div class="items-num">Items (0):</div>
         <div class="payment-summary-money">$${formatMoney(productPriceCents)}</div>
     </div>
 
@@ -56,4 +68,18 @@ export function renderPaymentSummary() {
 
     document.querySelector('.js-payment-summary')
     .innerHTML = paymentHTML;
+
+    numUpdater();
 }
+
+function numUpdater(){
+    let cartQuantity = 0;
+  
+      cart.forEach((items) => {
+        cartQuantity += items.quantity;
+      });
+  
+      const doc = document.querySelector(".items-num");
+  
+      doc.innerHTML = `Items (${cartQuantity})`;
+  }

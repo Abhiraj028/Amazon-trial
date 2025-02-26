@@ -46,6 +46,8 @@ products.forEach((product) => {
             </select>
           </div>
 
+          ${product.extraInfoHTML()}
+
           <div class="product-spacer"></div>
 
           <div class="added-to-cart js-added-${product.id}">
@@ -86,7 +88,7 @@ document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
 
 
 //functions for the functionality
-function updateCartQuantity(){
+ function updateCartQuantity(){
   let cartQuantity = 0;
 
     cart.forEach((items) => {
