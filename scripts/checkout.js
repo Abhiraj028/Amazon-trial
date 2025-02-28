@@ -26,15 +26,30 @@ import { loadCart } from '../data/cart.js';
 //     renderPaymentSummary();
 // })
  
-Promise.all([
-    loadProductsFetch(),
-    new Promise((resolve)=>{
-        loadCart(()=>{
-            resolve("Inside resolve pt2 blicka");
+// Promise.all([
+//     loadProductsFetch(),
+//     new Promise((resolve)=>{
+//         loadCart(()=>{
+//             resolve("Inside resolve pt2 blicka");
+//         })
+//     })
+// ]).then((values)=>{
+//     console.log(values);
+//     renderOrderSummary();
+//     renderPaymentSummary();
+// })
+
+async function loadPage(){
+    await loadProductsFetch();
+
+    const value = await new Promise((resolve) =>{
+        loadCart(() =>{
+            resolve("balue2");
         })
     })
-]).then((values)=>{
-    console.log(values);
+
     renderOrderSummary();
     renderPaymentSummary();
-})
+}
+
+loadPage();
