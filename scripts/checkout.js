@@ -40,14 +40,17 @@ import { loadCart } from '../data/cart.js';
 // })
 
 async function loadPage(){
-    await loadProductsFetch();
-
-    const value = await new Promise((resolve) =>{
-        loadCart(() =>{
-            resolve("balue2");
+    try{
+        await loadProductsFetch();
+    
+        const value = await new Promise((resolve) =>{
+            loadCart(() =>{
+                resolve("balue2");
+            })
         })
-    })
-
+    }catch{
+        console.log("Error Werror blug");
+    }    
     renderOrderSummary();
     renderPaymentSummary();
 }
