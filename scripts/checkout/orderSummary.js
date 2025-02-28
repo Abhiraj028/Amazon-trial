@@ -6,9 +6,15 @@ import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.j
 import { renderPaymentSummary } from "./paymentSummary.js";
 
 
-topUpdater();
+
 
 export function renderOrderSummary() {
+
+  topUpdater();
+
+  console.log('Cart:', JSON.parse(JSON.stringify(cart)));
+  console.log('Products:', JSON.parse(JSON.stringify(products)));
+
   let cartSummaryHTML = "";
 
   cart.forEach((cartItem) => {
@@ -130,20 +136,21 @@ export function renderOrderSummary() {
         renderPaymentSummary();
       });
     });
+
+    function topUpdater(){
+      let cartQuantity = 0;
+    
+        cart.forEach((items) => {
+          cartQuantity += items.quantity;
+        });
+    
+        const doc = document.querySelector(".return-to-home-link");
+    
+        doc.innerHTML = `${cartQuantity} items`;
+    }
 }
 
-renderOrderSummary();
 
 
-function topUpdater(){
-  let cartQuantity = 0;
 
-    cart.forEach((items) => {
-      cartQuantity += items.quantity;
-    });
-
-    const doc = document.querySelector(".return-to-home-link");
-
-    doc.innerHTML = `${cartQuantity} items`;
-}
 

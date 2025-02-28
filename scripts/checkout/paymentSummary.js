@@ -69,16 +69,17 @@ export function renderPaymentSummary() {
     .innerHTML = paymentHTML;
 
     numUpdater();
+
+    function numUpdater(){
+        let cartQuantity = 0;
+      
+          cart.forEach((items) => {
+            cartQuantity += items.quantity;
+          });
+      
+          const doc = document.querySelector(".items-num");
+      
+          doc.innerHTML = `Items (${cartQuantity})`;
+      }
 }
 
-function numUpdater(){
-    let cartQuantity = 0;
-  
-      cart.forEach((items) => {
-        cartQuantity += items.quantity;
-      });
-  
-      const doc = document.querySelector(".items-num");
-  
-      doc.innerHTML = `Items (${cartQuantity})`;
-  }
